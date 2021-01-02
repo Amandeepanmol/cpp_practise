@@ -59,7 +59,7 @@ int main()
             cout<<"nine";
         }
     }
-    else
+  else
     {
         cout<<"Greater than 9";
     }
