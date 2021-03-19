@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-//#include<queue.h>
 using namespace std;
 #define n 100
 
