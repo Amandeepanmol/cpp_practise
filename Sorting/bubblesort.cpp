@@ -19,13 +19,13 @@ int main()
 
     for(i=0;i<n;i++)
     {
-        for(j=i+1;j<n;j++)
+        for(j=0;j<n-1;j++)
         {
-            if(arr[i]<arr[j])            //descending order for ascending just change < to > then
+            if(arr[j]<arr[j+1])            //descending order for ascending just change < to > then
             {
-                temp=arr[i];
-                arr[i]=arr[j];
-                arr[j]=temp;
+                temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
             }
         }
     }
