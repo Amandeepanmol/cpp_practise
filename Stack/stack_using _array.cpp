@@ -3,21 +3,25 @@ using namespace std;
 #define capacity 100
 int s[capacity],top=-1;
 
-bool isempty()
-{
-    if(top==-1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+
+bool isempty() 
+{ 
+	if(top == -1) 
+		return true; 
+	return false; 
+} 
+
+bool isFull() 
+{ 
+	if(top == capacity - 1) 
+		return true; 
+	return false; 
+} 
+
 
 void push(int value)
 {
-    if(top==capacity-1)
+    if(isFull())
     {
         cout<<"Stack is full"<<endl;
     }
@@ -31,13 +35,15 @@ void push(int value)
 
 void pop()
 {
-    if(top==-1)
+    if(isempty())
     {
         cout<<"Stack is empty"<<endl;
     }
     else
     {              //deletion of element
+       int x=s[top];
        top--;
+       cout<<"Poped element is: "<<x<<endl;
     }
     
 }
@@ -52,7 +58,7 @@ void display()
 
     for(int i=0;i<=top;i++)
     {
-        cout<<s[i]<<" ";                 
+        cout<<s[i]<<" ";           // printing the element         
 
         
     }
