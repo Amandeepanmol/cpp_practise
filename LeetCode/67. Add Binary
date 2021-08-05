@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        
+        int x=a.size()-1;
+        int y=b.size()-1;
+        
+        int carry=0;
+        int sum=0;
+        string ans="";
+        while(x>=0 || y>=0 || carry!=0)  
+        {
+            int xa=x>=0?(a[x]-'0'):0;
+            int xb=y>=0?(b[y]-'0'):0;
+            
+            x--;
+            y--;
+            
+            sum=xa+xb+carry;
+            ans=to_string(sum%2)+ans;
+            carry=sum/2;
+        }
+        
+        return ans;
+    }
+};
