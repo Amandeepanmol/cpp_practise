@@ -19,7 +19,7 @@ bool chek_subsequence(string str,string target)
         j++;
     }
     
-    if(i==str.size())   // all subsequence is covered 
+    if(i==str.size())   //  subsequence is checked for given string
     {
         return true;
     }
