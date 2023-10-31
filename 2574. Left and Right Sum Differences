@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<int> leftRightDifference(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int>l_arr(n);
+
+        l_arr[0] = 0;
+
+        int lsum = 0;
+
+        for(int i = 1;i<nums.size();i++)
+        {
+            l_arr[i] = lsum+nums[i-1];
+            lsum = l_arr[i];
+        }
+
+        vector<int>r_arr(n);
+
+        r_arr[n-1] = 0;
+        int rsum = 0;
+
+        for(int i = n-2; i >= 0; i--)
+        {
+            r_arr[i] = rsum+nums[i+1];
+            rsum = r_arr[i];
+        } 
+
+        // for(auto u:l_arr)
+        // {
+        //     cout<<u<<" ";
+        // }
+        // cout<<endl;
+       
+        // for(auto u:r_arr)
+        // {
+        //     cout<<u<<" ";
+        // }
+
+        vector<int>sol(n);
+        sol.clear();
+
+        for(int i = 0; i<r_arr.size(); i++)
+        {
+            int diff = abs(r_arr[i]-l_arr[i]);
+            sol.push_back(diff);
+        }
+        return sol;
+    }
+};
