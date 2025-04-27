@@ -1,4 +1,5 @@
-OCP violated
+OCP violation
+------------------
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -35,6 +36,7 @@ class Payment
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 OCP Preserved
+-------------
 
 #include<bits/stdc++.h>
 using namespace std;
