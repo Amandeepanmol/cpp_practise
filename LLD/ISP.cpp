@@ -76,3 +76,74 @@ int main()
     
     return 0;
 }
+
+
+************************************************************************************************************************************************************
+
+ISP Preserved 
+---------------
+
+    #include<bits/stdc++.h>
+using namespace std;
+
+class TwoDShape   // seperate interface for 2d
+{
+    public:
+    
+    virtual void area() = 0;
+
+};
+
+class ThreeDShape   // seperate interface for 3d
+{
+    public:
+    
+    virtual void area() =  0;
+    virtual void volume() = 0;
+
+};
+
+class Square : public TwoDShape
+{
+    public:
+    int s;
+    
+    Square(int s) : s(s) {}
+    
+    void area() override 
+    {
+        cout<<"Area of the Sqaure is :"<<s*s<<endl;
+    }
+};
+
+class Cube :public ThreeDShape
+{
+    public:
+    int c;
+    
+    Cube(int c) : c(c) {}
+    
+    void area() override
+    {
+        cout<<"Area of the cube is :"<<6*c*c<<endl;
+    }
+    
+    void volume() override 
+    {
+        cout<<"Volume of the Cube is:"<<c*c*c<<endl;
+    }
+};
+
+
+int main()
+{
+    TwoDShape *sq = new Square(8);
+    ThreeDShape *cu = new Cube(2);
+    
+    sq->area();
+    cu->area();
+    cu->volume();
+    
+    delete sq;
+    delete cu;
+}
