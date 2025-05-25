@@ -1,0 +1,49 @@
+DIP Violated
+--------------
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class MySqlDatabase  //low level module
+{
+    public:
+    void saveToSql(string data)
+    {
+        cout<<"Data is saved in MYSQL DB "<<data<<endl;
+    }
+};
+
+class MongoDatabase  // low level module
+{
+    public:
+    void saveToMongoDb(string data)
+    {
+        cout<<"Data is saved in MongoDb "<<data<<endl;
+    }
+};
+
+
+class UserClient   //High Level module
+{
+    public:
+    MySqlDatabase dbsq;     // tight coupling  (direct dependency on low level module)  => DIP Violated 
+    MongoDatabase dbmg;
+    
+    void storeToSql(string user)
+    {
+        dbsq.saveToSql(user);
+    }
+    
+    void storeToMongo(string user)
+    {
+        dbmg.saveToMongoDb(user);
+    }
+};
+
+int main()
+{
+    UserClient uc;
+    uc.storeToSql("Amandeep");
+    uc.storeToMongo("Subham");
+}
+
