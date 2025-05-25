@@ -47,3 +47,69 @@ int main()
     uc.storeToMongo("Subham");
 }
 
+
+************************************************************************************************************************************************
+DIP Preserved
+--------------
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class PersistenceDb   // Interface => [Abstraction]
+{
+    
+    public:
+    virtual void save(string data) = 0;
+    
+};
+
+class MySqlDatabase : public PersistenceDb //low level module
+{
+    public:
+    void save(string data) override
+    {
+        cout<<"Data is saved in MYSQL DB "<<data<<endl;
+    }
+};
+
+class MongoDatabase : public PersistenceDb // low level module
+{
+    public:
+    void save(string data) override
+    {
+        cout<<"Data is saved in MongoDb "<<data<<endl;
+    }
+};
+
+
+class UserClient   //High Level module
+{
+    public:
+    PersistenceDb *pdb;     
+    
+    UserClient(PersistenceDb *obj)  // loose coupling  
+    {
+        this->pdb = obj;
+    }
+   
+    
+    void storeUser(string user)
+    {
+        pdb->save(user);
+    }
+};
+
+int main()
+{
+    
+    MySqlDatabase dbsql;
+    MongoDatabase dbmg;
+    
+    UserClient uc(&dbsql);
+    uc.storeUser("Amandeep");
+    
+    UserClient ucc(&dbmg);
+    ucc.storeUser("Subham");
+}
+
+
