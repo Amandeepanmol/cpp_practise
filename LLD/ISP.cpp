@@ -147,3 +147,69 @@ int main()
     delete sq;
     delete cu;
 }
+
+
+------------------------------------------------------------------------------------------------------------
+Example : RestuarantWorker -> breaking into respective Interface to preserve ISP
+----------
+#include<bits/stdc++.h>
+using namespace std;
+
+class ICook 
+{
+    public:
+    virtual void cook() = 0;
+    virtual ~ICook() = default; 
+};
+
+class IServe
+{
+    public:
+    virtual void serve() = 0;
+    virtual ~IServe() = default;
+};
+
+class IWashDish 
+{
+    public:
+    virtual void dishWash() = 0;
+    virtual ~IWashDish() = default;
+};
+
+class Chef : public ICook
+{
+    public:
+    void cook() override
+    {
+        cout<<"Chef's cook food"<<endl;
+    }
+};
+
+class Waiter : public IServe 
+{
+    public:
+    void serve() override
+    {
+        cout<<"Waiter's serve food"<<endl;    
+    }
+};
+
+class DishWasher : public IWashDish 
+{
+    public:
+    void dishWash() override
+    {
+        cout<<"Dishwasher wash dishes"<<endl;
+    }
+};
+
+int main()
+{
+    ICook *iC = new Chef();
+    IServe *iS = new Waiter();
+    IWashDish *iW = new DishWasher();
+    
+    iC->cook();
+    iS->serve();
+    iW->dishWash();
+}
