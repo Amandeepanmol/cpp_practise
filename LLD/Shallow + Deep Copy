@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class A 
+{
+    public:
+    
+    int x;
+    int *ptr;
+    
+    
+    A()
+    {
+        x = 9;
+        ptr = new int(90);
+    }
+    
+    A(const A&obj)   //user defined ctor
+    {
+        x = obj.x;
+        ptr = new int;   // new dynamic memory created
+        
+        *ptr = *(obj.ptr);    // value from original object 's pointer copied'
+    }
+};
+
+int main()
+{
+    A o2;
+    A o3 = o2;
+    
+    cout<<o2.x<<" "<<*(o2.ptr)<<endl;
+    
+    cout<<o3.x<<" "<<*(o3.ptr)<<endl;
+    
+    o3.x = 99;
+    *(o3.ptr) = 999;   // shallow copy fails in the case  of pointer so go with deep copy achieved through user defined ctor
+    
+    cout<<o2.x<<" "<<*(o2.ptr)<<endl;   
+    
+    cout<<o3.x<<" "<<*(o3.ptr)<<endl;  
+}
+
+
+
+Note:
+------
+
+In the case of pointers, always use deep copy by writing a user-defined copy constructor.
+By default, the compiler-generated copy constructor performs a shallow copy, which can cause problems when pointers are involved (e.g., double deletion, shared memory, dangling pointers).
+This happens because the compiler just copies the pointer value (i.e., the address::reference), not the actual data being pointed to.
