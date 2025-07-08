@@ -1,0 +1,145 @@
+Issue 
+--------
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+    public:
+    
+    void teach()
+    {
+        cout<<"Teaching"<<endl;
+    }
+};
+
+class Teacher :  public Person 
+{
+
+};
+
+class Student :  public Person
+{
+   
+};
+
+
+class TeachingAssistant : public Teacher, public Student
+{
+   
+};
+
+int main()
+{
+    TeachingAssistant ta;
+    ta.teach();  // ambigous contains 2 copy [one from Teacher, one from student ] , ambiguity issue
+    
+}
+
+
+Solution 
+---------
+
+
+1. Using Virtual Base Class (Virtual Inheritance)   : 
+--------------------------------------------------
+ensure that only one shared instance of base class exists when inherited through multiple paths.
+virtual can be written before or after access specifier it will work fine in both case. 
+-------------------------------------------------------------------------------------------------
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+    public:
+    
+    void teach()
+    {
+        cout<<"Teaching"<<endl;
+    }
+};
+
+class Teacher : virtual  public Person 
+{
+
+};
+
+class Student : public virtual Person
+{
+   
+};
+
+
+class TeachingAssistant : public Teacher, public Student
+{
+   
+};
+
+int main()
+{
+    TeachingAssistant ta;
+    ta.teach();
+    
+}
+
+
+2. Using obj.ClassName::functionName(); // during calling
+   ------------------------------------------------------
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+    public:
+    
+    void teach()
+    {
+        cout<<"Teaching"<<endl;
+    }
+};
+
+class Teacher : public Person 
+{
+
+};
+
+class Student : public  Person
+{
+   
+};
+
+
+class TeachingAssistant : public Teacher, public Student
+{
+   
+};
+
+int main()
+{
+    TeachingAssistant ta;
+    ta.Student::teach();    // objName.className :: functionName(); 
+    
+}
+
+Note:    [Theory]
+------
+
+
+Issue:
+------
+When a class inherits from two classes that both inherit from the same base class, 
+it results in the Diamond Problem. This creates ambiguity when accessing base class methods.
+
+Solution 1: Virtual Inheritance  [virtual base class]
+-------------------------------
+- Use 'virtual' in inheritance to ensure only one instance of the base class is shared.
+- 'virtual' can appear before or after the access specifier (e.g., 'virtual public' or 'public virtual').
+
+Solution 2: Explicit Scope Resolution
+-------------------------------------
+- Use scope resolution to specify which base class version of the method you want to call.
+- Syntax: objectName.ClassName::functionName();
