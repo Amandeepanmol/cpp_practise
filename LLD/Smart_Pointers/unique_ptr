@@ -1,0 +1,30 @@
+#include<iostream>
+#include<memory>
+
+void f1()
+{
+    std::unique_ptr<int>p1(new int(90));
+    std::cout<<*p1<<std::endl;
+    
+    std::unique_ptr<int>p2;
+    p2 = p1;   // error :: copy assignment operator , copy constructor not supported
+   
+   p2 = std::move(p1);  // Transfers ownership from p1 to p2 , now p1 == NULL;
+   std::cout<<*p2<<std::endl;
+   
+   std::cout<<*p1<<std::endl;   // run time crash , segmentation fault, undefined behavior 
+   // always check unique_ptr is non-null before dereferencing
+}
+
+int main()
+{
+    f1();
+    
+    return 0;
+}
+
+//
+unique ptr is class template , its wraps raw pointer into it , and deallocates raw pointers when unique_ptr goes out of the scope.
+one pointer , one ownership.
+ownership can be pass using std::move() fn . unique_ptr whose ownership is passed becomes NULL.
+no support of copy assignment operator and copy constructor.
