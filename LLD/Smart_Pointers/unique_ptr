@@ -14,6 +14,11 @@ void f1()
    
    std::cout<<*p1<<std::endl;   // run time crash , segmentation fault, undefined behavior 
    // always check unique_ptr is non-null before dereferencing
+
+
+   std::unique_ptr<double>p3;
+   p3 = std::move(p2)   // error as p3 is double type , so to transfer ownership type must be same
+
 }
 
 int main()
