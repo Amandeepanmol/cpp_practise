@@ -17,7 +17,7 @@ void f1()
 
 
    std::unique_ptr<double>p3;
-   p3 = std::move(p2)   // error as p3 is double type , so to transfer ownership type must be same
+   p3 = std::move(p2);   // error as p3 is double type , so to transfer ownership type must be same
 
 }
 
@@ -28,8 +28,11 @@ int main()
     return 0;
 }
 
-//
-unique ptr is class template , its wraps raw pointer into it , and deallocates raw pointers when unique_ptr goes out of the scope.
-one pointer , one ownership.
-ownership can be pass using std::move() fn . unique_ptr whose ownership is passed becomes NULL.
-no support of copy assignment operator and copy constructor.
+
+// std::unique_ptr is a smart pointer class template.
+// It wraps a raw pointer and ensures proper deletion of the object it owns.
+// When the unique_ptr goes out of scope, it deletes the managed object.
+// It supports only move semantics (no copy constructor or copy assignment [copy semantics]).
+// Ownership can be transferred using std::move().
+// After move, the source unique_ptr becomes null.
+// Always check for null before dereferencing.
