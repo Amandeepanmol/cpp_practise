@@ -1,0 +1,17 @@
+https://www.naukri.com/code360/problems/kth-smallest-element_893056?leftPanelTabValue=PROBLEM
+
+int kthSmallest(int n,int k,vector<int> Arr)
+{
+    // Write your code here.
+    priority_queue<int>maxHp;
+
+    for(int i = 0; i<n; i++)
+    {
+        maxHp.push(Arr[i]);
+        if(maxHp.size() > k)
+        {
+            maxHp.pop();
+        }
+    }
+    return maxHp.top();
+}
