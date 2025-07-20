@@ -1,0 +1,88 @@
+Brute - force
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_map<ListNode*,bool>mp;
+        ListNode *curr = head;
+
+        while(curr != NULL)
+        {
+            if(mp.find(curr) == mp.end())
+            {
+                mp[curr] = true;
+            }
+            else
+            {
+                return curr;
+            }
+            curr = curr->next;
+        }
+        return NULL;
+    }
+};
+
+t(c) = o(n)
+s(c) = o(n)
+
+
+
+Optimial 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(!head || !head->next)
+        {
+            return NULL;
+        }
+
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if(slow == fast)
+            {
+                break;
+            }
+        }
+
+
+        if(fast == NULL || fast->next == NULL)
+        {
+            return NULL;
+        }
+
+
+        ListNode *p = head;
+        while(p != slow)
+        {
+            p = p->next;
+            slow = slow->next;
+        }
+        return p;
+    }
+};
+
+t(c) = o(n)
+s(c) = o(1)
