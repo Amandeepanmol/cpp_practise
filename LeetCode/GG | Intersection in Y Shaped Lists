@@ -1,0 +1,61 @@
+// Linked list Node
+/*
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+  
+    int sizeOfLL(Node *head1)
+    {
+        int sizi = 0;
+        while(head1 != NULL)
+        {
+            sizi++;
+            head1 = head1->next;
+        }
+        return sizi;
+    }
+    
+    Node* intersectPoint(Node* head1, Node* head2) {
+        //  Code Here
+        if(!head1) return NULL;
+        if(!head2) return NULL;
+        
+        int x = sizeOfLL(head1);
+        int y = sizeOfLL(head2);
+        int diff = abs(x-y);
+        
+        if(x > y)
+        {
+            while(diff--)
+            {
+                head1 = head1->next;
+            }
+        }
+        else
+        {
+            while(diff--)
+            {
+                head2 = head2->next;
+            }
+        }
+        
+        while(head1 != head2)
+        {
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        
+        return head1 == NULL ? NULL : head1;
+    }
+};
