@@ -1,0 +1,106 @@
+1st approach 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        
+        ListNode *tmp = head;
+        vector<int>vt;
+
+        while(tmp != NULL)
+        {
+            vt.push_back(tmp->val);
+            tmp = tmp->next;
+        }
+
+        for(auto it:vt)
+        {
+            cout<<it<<" ";
+        }
+        cout<<endl;
+
+        int start = 0;
+        int end = vt.size()-1;
+
+        int maxi = 0;
+
+        while(start <= end)
+        {
+            int sumi = vt[start]+vt[end];
+            if(sumi > maxi)
+            {
+                maxi = sumi;
+            }
+            start++;
+            end--;
+        }
+        return maxi;
+    }
+};
+
+2nd Approach 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+
+    ListNode *revLL(ListNode *head)
+    {
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        ListNode *tmp;
+
+        while(curr != NULL)
+        {
+            tmp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = tmp;
+        }
+        return prev;
+    }
+    int pairSum(ListNode* head) {
+        
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        ListNode *h1 = head;
+        ListNode *h2 = revLL(slow);
+
+        int maxi = 0;
+
+        while(h2 != NULL)
+        {
+            maxi = max(maxi, h1->val+h2->val);
+            h1 = h1->next;
+            h2 = h2->next;
+        }
+        return maxi;
+
+    }
+};
