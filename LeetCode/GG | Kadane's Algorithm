@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int maxSubarraySum(vector<int> &arr) {
+        // Code here
+        int n = arr.size();
+        int maxi = arr[0]; // handle - negative integer case
+        int sumi = 0;
+        for(int i = 0; i<n; i++)
+        {
+            sumi += arr[i];
+            maxi = max(sumi, maxi);
+            if(sumi < 0)
+            {
+                sumi = 0;
+            }
+        }
+        return maxi;
+    }
+};
