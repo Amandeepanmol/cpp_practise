@@ -1,0 +1,58 @@
+/* Linked List Node structure
+struct Node
+{
+    int data;
+    struct Node* next;
+
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+
+};
+*/
+class Solution {
+  public:
+    void moveZeroes(struct Node*& head) {
+        // code here
+        //travers the node if - else ladder in which
+        // if node->data != 0 then add it in LL 
+        // else incremnt count of zero;
+        //after that add in LL at last
+        
+        if(!head || !head->next)
+        {
+            return ;
+        }
+        
+        Node *zeroNode  = new Node(-1);
+        Node *nonZeroNode = new Node(-1);
+        
+        Node *dNode = zeroNode;
+        Node *dNode2 = nonZeroNode;
+        
+        Node *curr = head;
+        while(curr != NULL)
+        {
+            if(curr->data != 0)
+            {
+                nonZeroNode->next = curr;
+                nonZeroNode = nonZeroNode->next;
+            }
+            else
+            {
+                zeroNode->next = curr;
+                zeroNode = zeroNode->next;
+            }
+            curr = curr->next;
+        }
+        
+        zeroNode->next = dNode2->next;
+        nonZeroNode->next = NULL;
+        
+        head = dNode->next;
+        
+    
+     
+    }
+};
