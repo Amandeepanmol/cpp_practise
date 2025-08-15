@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        
+        int n = nums.size();
+
+        vector<int>pre_Sum(n);
+
+        pre_Sum[0] = nums[0];
+
+        for(int i = 1; i<n; i++)
+        {
+            pre_Sum[i] = pre_Sum[i-1]+nums[i];
+        }
+        return pre_Sum;
+    }
+};
