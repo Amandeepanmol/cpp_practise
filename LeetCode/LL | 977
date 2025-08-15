@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int n = nums.size();
+
+
+        int start = 0;
+        int end = n-1;
+
+        int pos = n-1;  // greatest will be present at the end can be sqaure of + or - no
+
+        vector<int>ans(n);
+
+        while(pos >= 0)
+        {
+            int a = nums[start] * nums[start];
+            int b = nums[end] * nums[end];
+
+            if(a > b)
+            {
+                ans[pos] = a;
+                start++;
+            }
+            else
+            {
+                ans[pos] = b;
+                end--;
+            }
+            pos--;
+        }
+        return ans;
+    }
+};
