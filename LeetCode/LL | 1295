@@ -1,3 +1,5 @@
+T(C) = O(n*d) => d : digit length in number
+
 class Solution {
 public:
     bool checkEven(int n)
@@ -23,5 +25,30 @@ public:
             }
         }
         return cnt;
+    }
+};
+
+--------------------------
+
+T(C) = O(N)
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) {
+
+        int n = nums.size();
+        vector<int>ans;
+
+        int cnt = 0;
+
+        for(int i = 0; i<n; i++)
+        {
+            string s = to_string(nums[i]);  // to_string : int to string => faster 
+            if(s.size() % 2 == 0)
+            {
+                cnt++;
+            }
+        }
+        return cnt;
+        
     }
 };
