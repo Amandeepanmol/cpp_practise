@@ -1,0 +1,57 @@
+Brute Force
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        int n = nums.size();
+
+        int cnt = 0;
+
+        for(int i = 0; i<n-1; i++)
+        {
+            for(int j = i+1; j<n; j++)
+            {
+                if(nums[i] == nums[j])
+                {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+};
+
+
+
+
+
+---------------------------------------------------------------------------------
+
+Optimal 
+
+T(C) = O(2n) = O(n)
+S(C) = O(n) // map created in memory
+
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        int n = nums.size();
+        unordered_map<int,int>um;
+
+        for(int i = 0; i<n; i++)
+        {
+            um[nums[i]]++;
+        }
+
+        int result = 0;
+
+        for(auto &it : um)
+        {
+            int data = it.second;
+            result += data *(data-1)/2;
+        }
+
+        return result;
+    }
+};
